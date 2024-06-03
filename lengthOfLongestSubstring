@@ -1,0 +1,18 @@
+#include <iostream>
+#include <string>
+
+int lengthOfLongestSubstring(const std::string& s) {
+    int lastIndex[256] = {0}, longest = 0, start = 0;
+    for (int end = 0; end < s.length(); ++end) {
+        start = std::max(start, lastIndex[s[end]]);
+        longest = std::max(longest, end - start + 1);
+        lastIndex[s[end]] = end + 1;
+    }
+    return longest;
+}
+
+int main() {
+    std::string s = "abcabcbb";
+    std::cout << lengthOfLongestSubstring(s) << std::endl;  // Output: 3
+    return 0;
+}
